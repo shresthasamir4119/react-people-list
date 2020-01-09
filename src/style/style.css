@@ -4,3 +4,27 @@ h1{
 div{
 	background: #eee;
 }
+
+.ppImage{
+	height: 50px;
+	width: auto;
+	border-radius: 50%;
+	float: right;
+}
+
+.detail{
+	text-align: center;
+
+}
+
+.profilepic{
+	border-radius: 50%;
+	height: auto;
+	display: block;
+	margin: auto;
+}
+
+.search{
+	width: 100%;
+	height: 30px;
+}

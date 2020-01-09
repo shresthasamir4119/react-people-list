@@ -2,11 +2,12 @@ import React, {Component} from 'react';
 
 class PeopleList extends Component{
 	render(){
-		const {id, firstName, lastName} = this.props.people;
+		const {id, firstName, lastName, profileImage} = this.props.people;
   	return (
-  		<div style ={this.divStyle} onClick = {this.props.show.bind(this,id-1)}>
+  		<div style ={this.divStyle} onClick = {this.props.show.bind(this,id-1)} className ='clearfix'>
   			<p>
   			{firstName} {lastName}
+        <img className = 'ppImage' src ={profileImage} alt='profile'/>
   			</p>
   			
   		</div>

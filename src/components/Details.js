@@ -10,8 +10,9 @@ class Details extends React.Component{
 	}
 	render(){
 		return (
-			<div>
+			<div className = 'detail'>
 				<p>
+				<img className='profilepic' src={this.props.data.profileImage} alt="pp"/>
 				First Name : {this.props.data.firstName}<br/>
 				Last Name : {this.props.data.lastName}<br/>
 				Email : {this.props.data.email}<br/>
