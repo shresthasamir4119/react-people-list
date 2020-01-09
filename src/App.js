@@ -1,26 +1,67 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import People from './components/People';
+import Header from './components/Header';
+import Details from './components/Details';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import './App.css';
+import './style/style.css';
+
+function withDetail(Component){
+  return function(props) {
+    console.log(props);
+    if (props.state.clickedOnPeople) {
+     return <Details data={props.state.data[props.state.id]} back={props.back}/>;
+    }
+    else {
+      
+      return <Component name = {props.state.data} show={props.show} />;
+      
+    }
+  };
+}
+
+const EnhancedDetail = withDetail(People);
+
+class App extends React.Component{
+  back = () =>{
+    this.setState({
+      clickedOnPeople:false,
+      id:'',
+    })
+  }
+  show = (data) =>{
+    this.setState({
+      clickedOnPeople:true,
+      id:data,
+    })
+  }
+
+  state = {
+    data:[],
+    loaded : false,
+    id:'',
+    clickedOnPeople:false,
+  }
+
+  componentDidMount(){
+    fetch('https://mock-io.herokuapp.com/users')
+    .then(res => res.json())
+    .then(res => this.setState({data:res, loaded: true}));
+
+  }
+  render(){
+    if(!this.state.loaded){
+      return <div>loading...</div>
+    }
+    else {
+      return (
+        <div>
+        <Header />
+        <EnhancedDetail {...this}/>
+         </div>
+      );
+    }
+  }
 }
 
 export default App;
